@@ -1,0 +1,20 @@
+{
+  "name": "railview",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "China national railway network map — HSR + conventional (Leaflet)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "process-data": "python3 scripts/process_rails.py",
+    "fetch-hsr": "python3 scripts/fetch_hsr_overpass.py"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

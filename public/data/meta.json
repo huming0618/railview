@@ -1,0 +1,9 @@
+{
+  "title": "中国铁路",
+  "source": "OpenStreetMap via Geofabrik China PBF (2026-09-30) + HOT OSM HDX stations",
+  "hsr_features": 57952,
+  "conventional_features": 31671,
+  "stations_features": 320,
+  "notes": "HSR = railway=rail + highspeed=yes (service tracks excluded). Conventional = other railway=rail, simplified/sampled for phone overview.",
+  "generated_at": "2026-10-02"
+}
