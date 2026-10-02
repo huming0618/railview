@@ -255,3 +255,20 @@ html, body, #app { height: 100%; margin: 0; background: var(--bg); color: var(--
   border: 1.5px solid rgba(0,0,0,0.45);
   box-shadow: 0 0 4px rgba(251,191,36,0.5);
 }
+
+.offline-banner {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  z-index: 600;
+  background: rgba(180, 83, 9, 0.92);
+  color: #fff7ed;
+  font-size: 13px;
+  line-height: 1.35;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  text-align: center;
+}

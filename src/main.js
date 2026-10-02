@@ -1,6 +1,12 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './style.css';
+import {
+  createCachedTileLayer,
+  syncOfflineZoomLimits,
+  warmCacheFromBundled,
+  isOnline,
+} from './tileCache.js';
 
 /** China mainland-ish overview bounds */
 const CHINA_BOUNDS = L.latLngBounds([18.0, 73.0], [53.6, 135.0]);
@@ -22,6 +28,7 @@ const el = {
   togHsr: document.getElementById('tog-hsr'),
   togConv: document.getElementById('tog-conv'),
   togSta: document.getElementById('tog-sta'),
+  offlineBanner: document.getElementById('offline-banner'),
 };
 
 /** @type {L.Map} */
@@ -226,6 +233,23 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
+
+/** @type {import('leaflet').TileLayer|null} */
+let baseTiles = null;
+let offlineTileWarned = false;
+
+function setOfflineBanner(show, text) {
+  if (!el.offlineBanner) return;
+  if (show) {
+    el.offlineBanner.hidden = false;
+    el.offlineBanner.textContent =
+      text ||
+      '离线模式：底图仅全国概览缩放（约 z4–z8）；放大需联网或已缓存瓦片';
+  } else {
+    el.offlineBanner.hidden = true;
+  }
+}
+
 async function init() {
   map = L.map('map', {
     zoomControl: false,
@@ -235,13 +259,31 @@ async function init() {
   });
   L.control.zoom({ position: 'topright' }).addTo(map);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: 'abcd',
-    maxZoom: 18,
-  }).addTo(map);
+  baseTiles = createCachedTileLayer(L, { maxZoom: 14 });
+  baseTiles.addTo(map);
+  syncOfflineZoomLimits(map, baseTiles);
+
+  let tileMissCount = 0;
+  baseTiles.on('tileoffline', () => {
+    tileMissCount += 1;
+    if (offlineTileWarned || tileMissCount < 3) return;
+    offlineTileWarned = true;
+    setOfflineBanner(true);
+  });
+  window.addEventListener('online', () => {
+    offlineTileWarned = false;
+    tileMissCount = 0;
+    setOfflineBanner(false);
+    syncOfflineZoomLimits(map, baseTiles);
+  });
+  window.addEventListener('offline', () => {
+    syncOfflineZoomLimits(map, baseTiles);
+    setOfflineBanner(true);
+  });
+  if (!isOnline()) setOfflineBanner(true);
 
   fitChina();
+  warmCacheFromBundled().catch(() => {});
 
   el.btnFit.addEventListener('click', () => {
     closeSheet();

@@ -3,18 +3,25 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "China national railway network map — HSR + conventional (Leaflet)",
+  "description": "China national railway network map — HSR + conventional (Leaflet + Capacitor Android offline)",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "process-data": "python3 scripts/process_rails.py",
-    "fetch-hsr": "python3 scripts/fetch_hsr_overpass.py"
+    "fetch-hsr": "python3 scripts/fetch_hsr_overpass.py",
+    "build:android": "VITE_BASE=./ vite build && npx cap sync android",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android",
+    "seed-offline-tiles": "node scripts/download-offline-tiles.js"
   },
   "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
     "leaflet": "^1.9.4"
   },
   "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
     "vite": "^6.0.0"
   }
 }

@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-10-02T01:33:37.950Z",
+  "zoom": {
+    "min": 4,
+    "max": 8
+  },
+  "seedBbox": [
+    18,
+    73,
+    53.6,
+    135
+  ],
+  "note": "China national overview (z4–z8). Seeded primarily from Esri World Dark Gray Base (Carto often watermark-blocked). Runtime still tries Carto dark_all online.",
+  "perZoom": {
+    "4": {
+      "x0": 11,
+      "x1": 14,
+      "y0": 5,
+      "y1": 7,
+      "count": 12
+    },
+    "5": {
+      "x0": 22,
+      "x1": 28,
+      "y0": 10,
+      "y1": 14,
+      "count": 35
+    },
+    "6": {
+      "x0": 44,
+      "x1": 56,
+      "y0": 20,
+      "y1": 28,
+      "count": 117
+    },
+    "7": {
+      "x0": 89,
+      "x1": 112,
+      "y0": 41,
+      "y1": 57,
+      "count": 408
+    },
+    "8": {
+      "x0": 179,
+      "x1": 224,
+      "y0": 82,
+      "y1": 114,
+      "count": 1518
+    }
+  },
+  "uniqueRequested": 2090,
+  "downloadedOk": 2090,
+  "failed": 0,
+  "skippedExisting": 0,
+  "providersUsed": {
+    "esri": 2090,
+    "osmfr": 0,
+    "osmde": 0,
+    "carto": 0
+  },
+  "primaryProvider": "esri",
+  "uniqueHashesOnDisk": 1800,
+  "attribution": "Basemap tiles © Esri (World Dark Gray) and/or © OpenStreetMap contributors. Bundled for offline Rail View demo only.",
+  "pathTemplate": "offline-tiles/{z}/{x}/{y}.png",
+  "onDiskPngCount": 2090,
+  "onDiskBytes": 7749382,
+  "onDiskMB": 7.39
+}

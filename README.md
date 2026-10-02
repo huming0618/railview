@@ -39,3 +39,14 @@ GitHub Pages uses Vite `base: '/railview/'`.
 ## License
 
 Map data © OpenStreetMap contributors (ODbL). Code MIT.
+
+## Android (Capacitor offline)
+
+```bash
+npm install
+npm run seed-offline-tiles   # China overview z4–z8 into public/offline-tiles
+npm run build:android
+cd android && ./gradlew assembleDebug
+```
+
+App id: `com.huming.railview`. Offline basemap covers national overview zooms only; higher zooms need network / Cache API.
